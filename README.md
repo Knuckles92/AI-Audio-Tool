@@ -9,12 +9,11 @@ A powerful desktop application for recording, transcribing, and managing audio c
 ## Features
 
 - 🎙️ **Audio Recording**: Record audio directly from your microphone
-- 📝 **Real-time Transcription**: Convert speech to text using OpenAI's Whisper API
+- 📝 **Transcription**: Convert speech to text using OpenAI's Whisper API
 - 📁 **File Support**: Upload or drag-and-drop audio files (.wav, .mp3, .ogg, .flac)
 - 🔊 **Text-to-Speech**: Read transcriptions aloud using OpenAI's TTS API
 - 📋 **History Management**: Save and manage transcription history
 - 👤 **Profile System**: Create and use custom transcription profiles
-- 🌙 **Dark Mode**: Toggle between light and dark themes
 - 🔑 **Secure API Key Storage**: Safely store your OpenAI API key
 - ⌨️ **Global Hotkeys**: Control recording with keyboard shortcuts
 
@@ -135,4 +134,4 @@ For support, please:
 3. Create a discussion in the repository
 
 ---
-Made with ❤️ by Knuckles92
+Made by Knuckles92
