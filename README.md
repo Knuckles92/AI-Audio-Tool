@@ -5,6 +5,8 @@ A powerful desktop application for recording, transcribing, and managing audio c
 ![Application Screenshot](image.png)
 ![Application Screensho2](image2.png)
 ![Application Screenshot3](image3.png)
+![Application Screenshot3](recgif.gif)
+![Application Screenshot3](full.gif)
 
 ## Features
 
