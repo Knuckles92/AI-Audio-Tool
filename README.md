@@ -30,7 +30,7 @@ cd AI-Audio-Tool
 2. Add your OpenAI API key in one of these ways:
    - Enter it in the app's settings tab
    - Set it as the `OPENAI_API_KEY` environment variable
-   - Create a `.env` file with: `OPENAI_API_KEY=your-api-key-here`
+   - Create a `.env` file with: `api_key=your-api-key-here`
 
 3. Start using the app! Click "Start Recording" or press `Alt+R` to begin.
 
