@@ -99,9 +99,18 @@ class AudioTranscriberApp:
 
     def load_and_verify_api_key(self):
         """
-        Retrieves the API key from keyring. If not found, prompts the user to enter it.
+        Retrieves the API key from keyring or environment variables. If not found, prompts the user to enter it.
         Returns True if API key is successfully retrieved, False otherwise.
         """
+        # First try to get from environment variables
+        api_key = os.environ.get("OPENAI_API_KEY")
+        if api_key:
+            print("API key loaded from environment variables")
+            logging.info("API key loaded from environment variables")
+            self.API_KEY = api_key
+            return True
+            
+        # Then try keyring
         api_key = keyring.get_password("whisper_api", "api_key")
         if not api_key:
             logging.info("API key not found. Prompting user to enter it.")
@@ -165,9 +174,16 @@ class AudioTranscriberApp:
             from openai import OpenAI
             client = OpenAI(api_key=self.API_KEY)
             
-            # Create a temporary file
-            temp_dir = tempfile.gettempdir()
-            temp_path = os.path.join(temp_dir, f'tts_audio_{int(time.time())}.mp3')
+            # Determine file path
+            timestamp = int(time.time())
+            if self.save_audio_var.get():
+                # Create an 'audio_output' directory if it doesn't exist
+                output_dir = os.path.join(self.get_executable_dir(), 'audio_output')
+                os.makedirs(output_dir, exist_ok=True)
+                audio_path = os.path.join(output_dir, f'tts_audio_{timestamp}.mp3')
+            else:
+                temp_dir = tempfile.gettempdir()
+                audio_path = os.path.join(temp_dir, f'tts_audio_{timestamp}.mp3')
             
             # Call OpenAI TTS API
             response = client.audio.speech.create(
@@ -176,13 +192,13 @@ class AudioTranscriberApp:
                 input=text
             )
             
-            # Write the response content to the temp file
-            response.write_to_file(temp_path)
+            # Write the response content to file
+            response.write_to_file(audio_path)
             
             if not self.reading_cancelled:
                 try:
                     # Create a separate mixer channel for TTS playback
-                    pygame.mixer.Channel(1).play(pygame.mixer.Sound(temp_path))
+                    pygame.mixer.Channel(1).play(pygame.mixer.Sound(audio_path))
                     
                     # Wait for playback to finish or cancellation
                     while pygame.mixer.Channel(1).get_busy() and not self.reading_cancelled:
@@ -192,11 +208,14 @@ class AudioTranscriberApp:
                     # Clean up the channel
                     pygame.mixer.Channel(1).stop()
             
-            # Try to remove the temporary file
-            try:
-                os.remove(temp_path)
-            except Exception as e:
-                logging.warning(f"Could not remove temporary file {temp_path}: {e}")
+            # Only remove the file if it's not meant to be saved
+            if not self.save_audio_var.get():
+                try:
+                    os.remove(audio_path)
+                except Exception as e:
+                    logging.warning(f"Could not remove temporary file {audio_path}: {e}")
+            else:
+                self.root.after(0, lambda: self.update_status(f"Audio saved to: {audio_path}", "info"))
             
             if not self.reading_cancelled:
                 self.root.after(0, lambda: self.update_status("Reading text aloud completed", "info"))
@@ -557,6 +576,15 @@ class AudioTranscriberApp:
         )
         self.auto_read_checkbox.pack(side=tk.LEFT, padx=5)
 
+        # Save audio checkbox
+        self.save_audio_var = tk.BooleanVar(value=False)
+        self.save_audio_checkbox = ttk.Checkbutton(
+            read_aloud_frame,
+            text="Save audio to file",
+            variable=self.save_audio_var
+        )
+        self.save_audio_checkbox.pack(side=tk.LEFT, padx=5)
+
         # Send History checkbox
         self.send_history_var = tk.BooleanVar(value=False)
         self.send_history_checkbox = ttk.Checkbutton(
@@ -698,7 +726,7 @@ class AudioTranscriberApp:
         Creates the user interface components for the Profiles tab.
         """
         # Profile selection dropdown
-        profile_selection_label = ttk.Label(self.profiles_frame, text="Select Profile to Edit:")
+        profile_selection_label = ttk.Label(self.profiles_frame, text="Select Profile to Edit:", font=("Helvetica", 14, "bold"))
         profile_selection_label.pack(pady=5)
         self.profile_selection_var = tk.StringVar()
         self.profile_selection_dropdown = ttk.Combobox(
@@ -720,7 +748,7 @@ class AudioTranscriberApp:
         self.profile_name_entry.pack(side=tk.LEFT, expand=True, fill=tk.X, padx=5)
 
         # Profile description input
-        profile_desc_label = ttk.Label(self.profiles_frame, text="Profile Description:")
+        profile_desc_label = ttk.Label(self.profiles_frame, text="Profile Description:", font=("Helvetica", 14, "bold"))
         profile_desc_label.pack(pady=5)
         self.profile_desc_text = scrolledtext.ScrolledText(self.profiles_frame, height=5, width=40)
         self.profile_desc_text.pack(pady=5, fill=tk.BOTH, expand=True)
@@ -1440,6 +1468,13 @@ class AudioTranscriberApp:
             logging.error(f"Error saving transcription history: {e}")
             messagebox.showerror("Save Error", f"Failed to save transcription history: {e}")
 
+    def on_minimize(self):
+        """
+        Handles the application minimize event, minimizing it to the system tray.
+        """
+        self.root.withdraw()  # Hide the main window
+        messagebox.showinfo("Minimize to Tray", "The application has been minimized to the system tray.")
+
     def on_closing(self):
         """
         Handles the application closing event, ensuring all resources are cleaned up properly.
@@ -1607,6 +1642,7 @@ class AudioTranscriberApp:
         """
         try:
             self.root.protocol("WM_DELETE_WINDOW", self.on_closing)
+            self.root.bind("<Unmap>", lambda event: self.on_minimize() if self.root.state() == 'iconic' else None)
             self.root.mainloop()
         except Exception as e:
             logging.error(f"Unhandled exception: {e}")
@@ -1760,6 +1796,8 @@ class AudioTranscriberApp:
             pystray.MenuItem("Exit", self.on_tray_exit)
         )
 
+
+
     def create_image(self, width, height, color1, color2):
         """
         Creates an image for the system tray icon.
@@ -1771,9 +1809,11 @@ class AudioTranscriberApp:
 
     def on_tray_click(self, icon, item):
         """
-        Restores the application window when the tray icon is clicked.
+        Restores the application window when clicked from tray menu.
         """
-        self.root.deiconify()
+        self.root.after(0, lambda: self.root.deiconify())
+        self.root.after(0, lambda: self.root.lift())
+        self.root.after(0, lambda: self.root.focus_force())
 
     def on_tray_exit(self, icon, item):
         """
