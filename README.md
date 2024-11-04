@@ -19,6 +19,21 @@ A powerful desktop application for recording, transcribing, and managing audio c
 - 🔑 **Secure API Key Storage**: Safely store your OpenAI API key
 - ⌨️ **Global Hotkeys**: Control recording with keyboard shortcuts
 
+## Quick Start
+
+1. Clone the repository:
+```bash
+git clone https://github.com/Knuckles92/AI-Audio-Tool.git
+cd AI-Audio-Tool
+```
+
+2. Add your OpenAI API key in one of these ways:
+   - Enter it in the app's settings tab
+   - Set it as the `OPENAI_API_KEY` environment variable
+   - Create a `.env` file with: `OPENAI_API_KEY=your-api-key-here`
+
+3. Start using the app! Click "Start Recording" or press `Alt+R` to begin.
+
 ## Prerequisites
 
 - Python 3.8 or higher
