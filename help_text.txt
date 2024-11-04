@@ -1,0 +1,161 @@
+<h1>Welcome to the Audio Recorder and Transcriber User Guide!</h1>
+
+<h2>1. Key Features</h2>
+<ul>
+   <li>🎙️ Real-time audio recording and transcription using OpenAI's Whisper API</li>
+   <li>📁 Audio file upload for transcription (via interface or drag-and-drop)</li>
+   <li>📜 Comprehensive transcription history management</li>
+   <li>📄 Multiple export formats: TXT, DOCX, PDF</li>
+   <li>🌓 Dark mode and customizable settings</li>
+   <li>⌨️ Global hotkeys for quick actions</li>
+   <li>🖥️ System tray icon for easy access</li>
+   <li>🔊 Text-to-Speech capability for transcriptions</li>
+   <li>📋 Automatic clipboard copy of transcriptions</li>
+   <li>🔍 Searchable transcription history</li>
+</ul>
+
+<h2>2. Getting Started</h2>
+<h3>a) Prerequisites</h3>
+<ul>
+   <li>✅ A valid OpenAI API key (set up in Settings)</li>
+   <li>🌐 Working internet connection</li>
+   <li>🎧 Proper audio device setup</li>
+   <li>🎵 FFmpeg installed on your system</li>
+</ul>
+
+<h3>b) First-time Setup</h3>
+<ol>
+   <li>🔧 Open Settings (File > Settings)</li>
+   <li>🔑 Enter your OpenAI API key</li>
+   <li>🔊 Adjust audio settings if needed</li>
+   <li>👤 Create profiles for customized transcription (optional)</li>
+</ol>
+
+<h2>3. Basic Operations</h2>
+<ul>
+   <li><strong>Start/Stop Recording:</strong>
+      <ul>
+         <li>Click "Start Recording" button</li>
+         <li>Use <kbd>Alt+R</kbd> shortcut</li>
+      </ul>
+   </li>
+   <li><strong>Cancel Recording/Transcription:</strong>
+      <ul>
+         <li>Click "Cancel" button</li>
+         <li>Use <kbd>Alt+C</kbd> shortcut</li>
+      </ul>
+   </li>
+   <li><strong>Upload Audio File:</strong>
+      <ul>
+         <li>Click "Upload Audio File" button</li>
+         <li>Drag and drop file into the window</li>
+         <li>Supported formats: WAV, MP3, OGG, FLAC</li>
+      </ul>
+   </li>
+   <li><strong>Text-to-Speech:</strong>
+      <ul>
+         <li>Click "Read Aloud" button to hear transcription</li>
+         <li>Enable "Auto-read new transcriptions" for automatic playback</li>
+         <li>Cancel reading at any time with the Cancel button</li>
+      </ul>
+   </li>
+   <li><strong>Auto-copy to Clipboard:</strong>
+      <ul>
+         <li>Transcriptions are automatically copied to your clipboard upon completion</li>
+         <li>Ready for immediate use in other applications</li>
+      </ul>
+   </li>
+</ul>
+
+<h2>4. Managing Transcriptions</h2>
+<ul>
+   <li>👁️ <strong>View History:</strong> Toggle with "Show History" button</li>
+   <li>🔍 <strong>Search:</strong> Use the search bar in the history panel</li>
+   <li>🗑️ <strong>Clear History:</strong>
+      <ul>
+         <li>"Clear Selected History" for individual entries</li>
+         <li>"Clear All" for entire history</li>
+      </ul>
+   </li>
+   <li>📤 <strong>Export:</strong> File > Export (choose TXT, DOCX, or PDF format)</li>
+   <li>💾 <strong>Backup:</strong> Automatic backup of transcription history</li>
+</ul>
+
+<h2>5. Advanced Features</h2>
+<ul>
+   <li><strong>Profiles (ChatGPT-powered Processing):</strong>
+      <ul>
+         <li>Create and manage in the "Profiles" tab</li>
+         <li>Powered by ChatGPT for intelligent text processing</li>
+         <li>Built-in profile templates:
+            <ul>
+               <li>🌐 Translation: Convert transcriptions to different languages</li>
+               <li>✨ Clean-up: Fix grammar, punctuation, and formatting</li>
+               <li>📝 Format: Convert to specific document styles (meeting notes, subtitles, etc.)</li>
+               <li>📊 Summarize: Create concise summaries of long transcriptions</li>
+               <li>📋 Extract: Pull out key points, action items, or specific information</li>
+            </ul>
+         </li>
+         <li>Custom profile options:
+            <ul>
+               <li>🎯 Define specific instructions for ChatGPT processing</li>
+               <li>🔄 Chain multiple operations (e.g., translate then summarize)</li>
+               <li>📋 Apply custom formatting templates</li>
+               <li>🎭 Convert tone or style (e.g., formal to casual)</li>
+               <li>📑 Extract specific data patterns or structures</li>
+            </ul>
+         </li>
+         <li>To use a profile:
+            <ol>
+               <li>Select a built-in profile or create a custom one</li>
+               <li>Choose the profile from the dropdown before recording</li>
+               <li>Record or upload your audio</li>
+               <li>The transcription will be automatically processed through ChatGPT</li>
+               <li>Review and edit the processed text if needed</li>
+            </ol>
+         </li>
+         <li>Profile settings:
+            <ul>
+               <li>🤖 Choose ChatGPT model (GPT-3.5 or GPT-4)</li>
+               <li>⚡ Adjust processing parameters</li>
+               <li>💾 Save and reuse custom profiles</li>
+               <li>📤 Export/Import profiles for sharing</li>
+            </ul>
+         </li>
+      </ul>
+   </li>
+   <li><strong>Settings (File > Settings):</strong>
+      <ul>
+         <li>General: Save location, Dark mode</li>
+         <li>Audio: Bitrate (64/128/256 kbps), Sample rate (22050/44100/48000 Hz), Volume</li>
+         <li>API: OpenAI API key, Transcription model (whisper-1), Profile model (GPT-4 variants)</li>
+      </ul>
+   </li>
+   <li><strong>System Tray:</strong>
+      <ul>
+         <li>Minimize app to system tray</li>
+         <li>Quick access to main functions</li>
+         <li>Right-click menu for basic operations</li>
+      </ul>
+   </li>
+</ul>
+
+<h2>6. Troubleshooting</h2>
+<ul>
+   <li><strong>Application status:</strong> Check status bar for current app status and messages</li>
+   <li><strong>Connection issues:</strong> Ensure internet connection is stable</li>
+   <li><strong>API problems:</strong> Verify API key is correctly entered in settings</li>
+   <li><strong>Audio issues:</strong> Check audio devices are properly connected and selected</li>
+   <li><strong>System checks:</strong> The application performs initial checks for:
+      <ul>
+         <li>Internet connectivity</li>
+         <li>Audio device availability</li>
+         <li>API key presence</li>
+         <li>FFmpeg installation</li>
+      </ul>
+   </li>
+</ul>
+
+<p><em>For additional help or to report issues, please <a href="mailto:support@yourdomain.com">contact our support team</a>.</em></p>
+
+<h2>Enjoy using the Audio Recorder and Transcriber! 🎉</h2>

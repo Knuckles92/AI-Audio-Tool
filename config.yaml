@@ -1,0 +1,13 @@
+settings:
+  bitrate: 128 kbps
+  dark_mode: false
+  gpt_model: gpt-4o-mini
+  profile_model: chatgpt-4o-latest
+  profiles:
+    Ask GPT: You are a helpful assisant that answers the questions posed in the transcription.
+    Spanish: Please translate this text to Spanish.
+  sample_rate: 44100
+  save_location: ''
+  transcription_model: whisper-1
+  use_keyring: false
+  volume: 0.5058823529411764
