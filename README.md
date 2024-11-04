@@ -2,7 +2,7 @@
 
 A powerful desktop application for recording, transcribing, and managing audio content using OpenAI's Whisper API.
 
-![Application Screenshot](screenshot.png) *(Add your screenshot here)*
+![Application Screenshot](image.png)
 
 ## Features
 
