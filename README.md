@@ -127,6 +127,11 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - OpenAI for Whisper and TTS APIs
 - FFmpeg for audio processing
 - All contributors and users
+- Aider
+- Cline
+- Anthropic/Claude
+- Deepseek
+- Openrouter
 
 ## Support
 
