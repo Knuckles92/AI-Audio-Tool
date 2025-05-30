@@ -1,0 +1,15 @@
+sounddevice
+numpy
+requests
+pygame
+PyYAML
+keyring
+pydub
+python-docx
+fpdf
+pyperclip
+pystray
+Pillow
+tkinterdnd2
+pynput
+openai
